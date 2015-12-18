@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="databasesetup" default="makedatabase">
+<property file="application.properties"/>
+ 
+ <path id="classpath">
+    <fileset dir="${libs.dir}">
+       <include name="*.jar">
+       </include>
+  </fileset>
+ </path>
+  <target name="makedatabase" depends="startdb,runsql,stopdb" />
+  
+      <target name="startdb">
+       <echo message="Starting Database"/>
+      <exec executable="${DB_HOME}" osfamily="windows">
+      </exec>
+
+      <exec executable="mysql.server" osfamily="unix">
+        <arg value="start"/>
+      </exec>
+    </target>
+
+    <target name="stopdb">
+      <exec executable="${DB_HOME}" osfamily="windows">
+        <arg value="-u"/>
+        <arg value="root"/>
+        <arg value="shutdown"/>
+      </exec>
+
+      <exec executable="mysql.server" osfamily="unix">
+        <arg value="stop"/>
+      </exec>
+    </target>
+    <target name = "createScriptFile">
+       <delete file="generatedSql.sql"/>
+        <concat destfile="generatedSql.sql">
+         <string><![CDATA[
+            DROP USER IF EXISTS 'teacher'@'${DB_HOST}';
+            DROP USER IF EXISTS 'student'@'${DB_HOST}';
+            CREATE USER 'teacher'@'${DB_HOST}' IDENTIFIED BY '${DB_TEAPASS}';
+            CREATE USER 'student'@'${DB_HOST}' IDENTIFIED BY '${DB_STUDPASS}';
+            Drop Database IF EXISTS ${DATABASE_NAME};
+            CREATE DATABASE ${DATABASE_NAME};
+            Use ${DATABASE_NAME};
+            GRANT ALL ON ${DATABASE_NAME}.* TO 'student'@'${DB_HOST}';
+            GRANT ALL ON ${DATABASE_NAME}.* TO 'teacher'@'${DB_HOST}';
+       ]]></string>
+         <file file="sql/makedatabase.sql"/>
+         </concat>
+    </target>
+    <target name="runsql" depends="createScriptFile">
+        
+       <sql
+         driver="${DB_DRIVER}"
+         url="${DB_URL}"
+         userid="${DB_ROOTUSER}"
+         password="${DB_ROOTPASS}"
+         src="generatedSql.sql" classpathref="classpath">
+       </sql>
+        <delete file="generatedSql.sql"/>
+   </target>
+
+</project>
