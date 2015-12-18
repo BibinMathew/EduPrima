@@ -1,2 +1,0 @@
-# EduPrima
-Eduprima
