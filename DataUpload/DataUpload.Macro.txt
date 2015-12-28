@@ -1,0 +1,26 @@
+Sub Button1_Click()
+Dim myFile As String, cellValue As Variant, i As Integer, j As Integer
+Dim row As Integer, column As Integer
+myFile = Application.DefaultFilePath & "\Data.txt"
+Open myFile For Output As #1
+row = ActiveSheet.UsedRange.SpecialCells(xlCellTypeLastCell).row
+column = 4
+For i = 1 To row
+    For j = 1 To column
+    cellValue = cellValue + Cells(i, j).Value + ","
+    Next j
+    Print #1, cellValue
+    cellValue = ""
+Next i
+Close #1
+    
+End Sub
+Sub UnhideSheets()
+
+Dim ws As Worksheet
+
+For Each ws In ActiveWorkbook.Worksheets
+
+ws.Visible = xlSheetVisible
+
+Next ws
