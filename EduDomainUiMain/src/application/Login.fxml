@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="pane" prefHeight="700" prefWidth="1000" scaleShape="false" stylesheets="@css/application.css" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView fitHeight="199.0" fitWidth="199.0" layoutX="14.0" layoutY="30.0">
+         <image>
+            <Image url="@images/Paco_catholic_school,_official_school_logo.png" />
+         </image>
+      </ImageView>
+      <TextField layoutX="239.0" layoutY="297.0" prefHeight="53.0" prefWidth="368.0" />
+      <PasswordField layoutX="239.0" layoutY="388.0" prefHeight="53.0" prefWidth="368.0" />
+      <Label alignment="CENTER_RIGHT" layoutX="23.0" layoutY="299.0" text="User Name : " textFill="#eae9e9">
+         <font>
+            <Font name="System Bold" size="36.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="23.0" layoutY="388.0" prefHeight="53.0" prefWidth="216.0" text="Password : " textFill="#eae9e9">
+         <font>
+            <Font name="System Bold" size="36.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="270.0" layoutY="103.0" prefHeight="53.0" prefWidth="529.0" text="Login To PACO Catholic School" textFill="#eae9e9">
+         <font>
+            <Font name="System Bold" size="36.0" />
+         </font>
+      </Label>
+      <Button layoutX="239.0" layoutY="487.0" mnemonicParsing="false" text="Log In">
+         <font>
+            <Font size="23.0" />
+         </font>
+      </Button>
+   </children>
+   </AnchorPane>
